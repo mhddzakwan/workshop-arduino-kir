@@ -93,6 +93,83 @@ void loop() {
 
 ```
 
+# Gabungan LED dan Sensor Ultrasonik
+
+- Jika jarak lebih dari 20 cm, LED hijau akan menyala.
+- Jika jarak antara 8 cm dan 20 cm, LED kuning akan menyala.
+- Jika jarak kurang dari 8 cm, LED merah akan menyala.
+
+```c
+// Inisialisasi pin untuk sensor HC-SR04
+const int trigPin = 7;  // Pin Trig untuk sensor HC-SR04
+const int echoPin = 6;  // Pin Echo untuk sensor HC-SR04
+
+// Inisialisasi pin untuk LED
+const int hijau = 8;  // LED hijau
+const int kuning = 9; // LED kuning
+const int merah = 10; // LED merah
+
+// Variabel untuk menyimpan waktu dan jarak
+long duration;
+int distance;
+
+void setup() {
+  // Atur pin sensor dan LED sebagai output dan input
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  pinMode(hijau, OUTPUT);
+  pinMode(kuning, OUTPUT);
+  pinMode(merah, OUTPUT);
+  
+  // Memulai komunikasi serial
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Pastikan trigPin LOW selama 2 mikrodetik
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+
+  // Set trigPin HIGH selama 10 mikrodetik untuk memulai pengukuran
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+  // Membaca durasi sinyal HIGH pada echoPin (waktu pantulan kembali)
+  duration = pulseIn(echoPin, HIGH);
+
+  // Menghitung jarak dalam cm
+  distance = duration * 0.034 / 2;
+
+  // Menampilkan jarak di Serial Monitor
+  Serial.print("Jarak: ");
+  Serial.print(distance);
+  Serial.println(" cm");
+
+  // Logika untuk mengontrol LED berdasarkan jarak
+  if (distance > 20) {
+    // Nyalakan LED hijau, matikan LED lainnya
+    digitalWrite(hijau, HIGH);
+    digitalWrite(kuning, LOW);
+    digitalWrite(merah, LOW);
+  } else if (distance >= 8 && distance <= 20) {
+    // Nyalakan LED kuning, matikan LED lainnya
+    digitalWrite(hijau, LOW);
+    digitalWrite(kuning, HIGH);
+    digitalWrite(merah, LOW);
+  } else if (distance < 8) {
+    // Nyalakan LED merah, matikan LED lainnya
+    digitalWrite(hijau, LOW);
+    digitalWrite(kuning, LOW);
+    digitalWrite(merah, HIGH);
+  }
+
+  // Tunggu 500 ms sebelum pengukuran berikutnya
+  delay(500);
+}
+
+
+```
 
 
 
