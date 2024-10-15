@@ -37,3 +37,61 @@ void loop() {
 }
 
 ```
+
+
+# Sensor Ultrasonik
+
+- TRIGG = PIN 7
+- ECHO = PIN 6
+- GND = GND
+- VCC = 5V
+
+```c
+// Inisialisasi pin untuk sensor HC-SR04
+const int trigPin = 7;  // Ganti dengan pin 7 untuk Trig
+const int echoPin = 6;  // Ganti dengan pin 6 untuk Echo
+
+// Variabel untuk menyimpan waktu dan jarak
+long duration;
+int distance;
+
+void setup() {
+  // Set trigPin sebagai output dan echoPin sebagai input
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  
+  // Memulai komunikasi serial
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Pastikan trigPin LOW selama 2 mikrodetik
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+
+  // Set trigPin HIGH selama 10 mikrodetik untuk memulai pengukuran
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+  // Membaca durasi sinyal HIGH pada echoPin (waktu pantulan kembali)
+  duration = pulseIn(echoPin, HIGH);
+
+  // Menghitung jarak dalam cm
+  distance = duration * 0.034 / 2;
+
+  // Menampilkan jarak di Serial Monitor
+  Serial.print("Jarak: ");
+  Serial.print(distance);
+  Serial.println(" cm");
+
+  // Tunggu 500 ms sebelum pengukuran berikutnya
+  delay(500);
+}
+
+```
+
+
+
+
+
