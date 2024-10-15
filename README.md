@@ -1,7 +1,7 @@
-#LED
+# LED
 - Hijau = Pin 10
-Kuning = Pin 9
-Merah = Pin 8
+- Kuning = Pin 9
+- Merah = Pin 8
 
 ```c
 // Deklarasi pin LED
