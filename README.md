@@ -1,4 +1,7 @@
 # LED
+
+![Alt text](img/ledkonek3.png)
+
 - Hijau = Pin 10
 - Kuning = Pin 9
 - Merah = Pin 8
