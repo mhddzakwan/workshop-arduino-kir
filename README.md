@@ -199,6 +199,65 @@ void loop() {
 
 ```
 
+# Gabungan Servo dan Sensor Ultrasonik
+
+Saat benda ada dijarak <= 10 cm, maka servo akan berputar, lalu 2 detik kemudian akan kembali ke posisi semula
+
+```c
+#include <Servo.h>  // Mengimpor pustaka Servo
+
+// Pin untuk sensor ultrasonik
+const int trigPin = 7;
+const int echoPin = 6;
+
+Servo servoMotor;  // Membuat objek Servo untuk mengontrol servo
+
+long duration;  // Variabel untuk menyimpan waktu perjalanan suara (dalam microsecond)
+int distance;   // Variabel untuk menyimpan jarak yang diukur oleh sensor ultrasonik
+
+void setup() {
+  // Mengatur pin trigPin sebagai output dan echoPin sebagai input
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  
+  // Menghubungkan servo ke pin digital 9
+  servoMotor.attach(9);
+
+  // Memulai komunikasi serial (untuk debugging jika perlu)
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Mengirimkan sinyal trigger (HIGH selama 10 mikrodetik)
+  digitalWrite(trigPin, LOW);  
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  
+  // Membaca durasi dari sinyal echo
+  duration = pulseIn(echoPin, HIGH);
+  
+  // Menghitung jarak (kecepatan suara adalah 34300 cm/detik)
+  distance = duration * 0.034 / 2;
+
+  // Menampilkan jarak di Serial Monitor (untuk debugging)
+  Serial.print("Jarak: ");
+  Serial.print(distance);
+  Serial.println(" cm");
+
+  // Jika jarak di bawah 10 cm, gerakkan servo ke 170 derajat
+  if (distance < 10) {
+    servoMotor.write(170);  // Menggerakkan servo ke posisi 170 derajat
+    delay(2000);  // Tunggu selama 2 detik
+    servoMotor.write(0);  // Kembalikan servo ke posisi 0 derajat
+  }
+
+  delay(100);  // Menambahkan sedikit delay untuk menghindari deteksi terlalu cepat
+}
+
+
+```
 
 
 
