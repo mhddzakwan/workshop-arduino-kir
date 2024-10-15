@@ -22,17 +22,17 @@ void setup() {
 void loop() {
   // LED Merah menyala selama 2 detik
   digitalWrite(ledMerah, HIGH);  // LED merah ON
-  delay(2000);                   // Tunggu 2 detik
+  delay(500);                   // Tunggu 0.5 detik
   digitalWrite(ledMerah, LOW);   // LED merah OFF
 
   // LED Kuning menyala selama 2 detik
   digitalWrite(ledKuning, HIGH); // LED kuning ON
-  delay(2000);                   // Tunggu 2 detik
+  delay(500);                   // Tunggu 0.5 detik
   digitalWrite(ledKuning, LOW);  // LED kuning OFF
 
   // LED Hijau menyala selama 2 detik
   digitalWrite(ledHijau, HIGH);  // LED hijau ON
-  delay(2000);                   // Tunggu 2 detik
+  delay(500);                   // Tunggu 0.5 detik
   digitalWrite(ledHijau, LOW);   // LED hijau OFF
 }
 
