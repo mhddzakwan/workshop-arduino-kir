@@ -171,6 +171,35 @@ void loop() {
 
 ```
 
+# Motor Servo
+
+![Alt text](img/servo.png)
+
+- MERAH = 3.3V
+- ORANGE = PIN 9
+- HITAM = GND
+
+```c
+#include <Servo.h>  // Mengimpor pustaka Servo
+
+Servo servoMotor;  // Membuat objek Servo untuk mengontrol servo
+
+int pos = 0;  // Variabel untuk menyimpan posisi servo
+
+void setup() {
+  servoMotor.attach(9);  // Menghubungkan servo ke pin digital 9 pada Arduino
+}
+
+void loop() {
+  servoMotor.write(0);  // Menggerakkan servo ke posisi tertentu
+  delay(1000) // Jeda 1 detik
+  servoMotor.write(170);  // Menggerakkan servo ke posisi tertentu
+  delay(1000) // Jeda 1 detik
+}
+
+```
+
+
 
 
 
