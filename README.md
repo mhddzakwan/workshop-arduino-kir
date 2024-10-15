@@ -41,6 +41,8 @@ void loop() {
 
 # Sensor Ultrasonik
 
+![Alt text](img/ultrasonikRakit.png)
+
 - TRIGG = PIN 7
 - ECHO = PIN 6
 - GND = GND
